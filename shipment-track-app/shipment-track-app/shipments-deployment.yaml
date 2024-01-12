@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shipments-deployment
+spec:
+  replicas: 2 
+  selector:
+    matchLabels:
+      app: shipments
+  template:
+    metadata:
+      labels:
+        app: shipments
+    spec:
+      containers:
+      - name: shipments
+        image: theolemojo/shipment-tracking-app/shipments:latest
+        ports:
+        - containerPort: 47151
