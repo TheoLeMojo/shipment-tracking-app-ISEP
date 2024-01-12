@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Shipments API
+  version: 1.0.0
+servers:
+  - url: http://localhost:47151/
+    description: Development server
+
+paths:
+  /shipments:
+    get:
+      summary: List all shipments
+      responses:
+        '200':
+          description: A list of shipments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Shipment'
+
+  /shipment/{id}:
+    get:
+      summary: Get a single shipment by ID
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Details of a shipment
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Shipment'
+        '404':
+          description: Shipment not found
+
+components:
+  schemas:
+    Shipment:
+      type: object
+      required:
+        - id
+        - content
+      properties:
+        id:
+          type: string
+        content:
+          type: string

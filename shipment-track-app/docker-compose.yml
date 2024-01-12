@@ -1,0 +1,30 @@
+version: '3'
+services:
+  shipments:
+    build:
+      context: ./shipments
+    ports:
+      - "47151:47151"
+    depends_on:
+      - mongo
+
+  users:
+    build:
+      context: ./users
+    ports:
+      - "47152:47152"
+    depends_on:
+      - mongo
+
+  orders:
+    build:
+      context: ./orders
+    ports:
+      - "47153:47153"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
